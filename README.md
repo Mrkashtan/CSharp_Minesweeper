@@ -1,4 +1,4 @@
-C# Minesweeper
+C# Сапер
 ==================
 
-Apologise for the state of the code, it was created years ago and in about half to one hour.. :P
+Клон игры Сапер для Windows на C#
