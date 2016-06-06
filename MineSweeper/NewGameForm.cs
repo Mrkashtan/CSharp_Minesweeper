@@ -54,5 +54,10 @@ namespace MineSweeper
         {
 
         }
+
+        private void rb_medium_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

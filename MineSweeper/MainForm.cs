@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MineSweeper
@@ -20,7 +15,7 @@ namespace MineSweeper
         {
             MineSweeper.NewGameForm newGame = new MineSweeper.NewGameForm();
             newGame.setParent(this);
-            newGame.ShowDialog();
+            newGame.Show();
         }
 
         /// <summary>
@@ -64,11 +59,7 @@ namespace MineSweeper
 
             Button bttnClick = sender as Button;
 
-            if (bttnClick == null)
-            {
-                return; //это не кнопка (как такое возможно?)
-            }
-        
+            
             string[] split = bttnClick.Name.Split(new Char[] { ' ' });
             int x = System.Convert.ToInt32(split[0]);
             int y = System.Convert.ToInt32(split[1]);
@@ -141,11 +132,11 @@ namespace MineSweeper
         private Label[,] lbl_grid;
         private int timer = 0;
 
-        int mintCount, width, height, startX = 15, startY = 68;
+        int mintCount, width, height, startX = 16, startY = 69;
         private bool createGrid()
         {
-            this.Width = startX * 2 + (width + 1) * 24 - 5;
-            this.Height = startY * 2 + (height) * 24;
+            this.Width = startX * 2 + (width + 1) * 20 - 5;
+            this.Height = startY * 2 + (height) * 20;
 
             grid = new int[width, height];
             btn_grid = new Button[width, height];
@@ -203,12 +194,12 @@ namespace MineSweeper
         /// </summary>
         private void addMines()
         {
-            Random rnd1 = new Random();
+            Random randomgenerator = new Random();
             int currMineCount = mintCount;
             while (currMineCount > 0)
             {
-                int mineX = rnd1.Next(width);
-                int mineY = rnd1.Next(height);
+                int mineX = randomgenerator.Next(width);
+                int mineY = randomgenerator.Next(height);
 
                 if (grid[mineX, mineY] == 0)
                 {
@@ -232,11 +223,13 @@ namespace MineSweeper
                 {
                     grid[x, y] = 0;
 
-                    btn_grid[x, y] = createButton(startX + 24 * (x + 0), startY + 24 * (y + 0), x, y);
-                    lbl_grid[x, y] = createLable(startX + 24 * (x + 0), startY + 24 * (y + 0));
+                    btn_grid[x, y] = createButton(startX + 24 * x, startY + 24 * y , x, y);
+                    lbl_grid[x, y] = createLable(startX + 24 * x , startY + 24 * y );
                 }
             }
         }
+
+       
 
         private void clearPreviousGame()
         {
@@ -267,7 +260,7 @@ namespace MineSweeper
             lbl_ElapsedTime.Text = "0";
             timer = 0;
             tmr_ElapsedTime.Start();
-            bool error = false;
+            //bool error = false;
             
             switch(difficulty)
             {
@@ -287,23 +280,20 @@ namespace MineSweeper
                     width = 30;
                     height = 16;
                     break;
-                default:
-                    error = true;
-                    break;
+                //default:
+                   // error = true;
+                   // break;
             }
 
             lbl_mines.Text = mintCount.ToString();
 
-            if (!error)
-            {
+           // if (!error)
+            
                 createGrid();
-            }
+            
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void tmr_ElapsedTime_Tick(object sender, EventArgs e)
         {
