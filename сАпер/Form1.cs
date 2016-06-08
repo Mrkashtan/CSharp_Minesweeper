@@ -286,7 +286,7 @@ namespace сАпер
                                     {
                                         if (x + dxx >= 0 && y + dyy >= 0 && x + dxx < w_str && y + dyy < h_stb)
                                         {
-                                            if (array[x + dxx, y + dyy] == -1)
+                                            if (array[x + dxx, y + dyy] == -1 || array[x + dxx, y + dyy] == 200)
                                             {
                                                 numMines++;
                                             }
